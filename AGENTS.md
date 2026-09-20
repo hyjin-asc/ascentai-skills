@@ -173,6 +173,8 @@ env 를 못 찾으면 `~/.lima-agents/current-session` 파일로 떨어지는데
 _core/                          전 스킬·전 언어 공통 · 여기만 고치면 전부 반영
 ├── styles/                     CSS 6종 (4스킬 바이트 동일 · 측정 확인)
 ├── render/components.py        (cluster 판이 상위집합 · 통합)
+├── render/inline_styles.py     CSS 이어붙이기 (순서는 스킬의 style_order.py)
+├── LICENSE.txt                 스킬 zip 에 들어가는 라이선스 (한 벌)
 ├── api/{logging.py,__init__.py}
 └── scripts/{mcp_cache.py,log_event.py}
      └ skill_name·version 은 __SKILL_NAME__ · __SKILL_VERSION__ 플레이스홀더
@@ -183,9 +185,10 @@ skills/<스킬명>/                 스킬 수만큼만
 ├── references/*.md             절차 문서 (영어)
 ├── labels/*.<언어>.json         리포트 UI 라벨 · kr·jp·us 세 벌을 모두 싣는다
 ├── render/                     이 스킬 전용 렌더러 (스킬마다 실제로 다름)
+│   └── style_order.py          이 스킬 슬러그별 CSS 순서 (합치는 코드는 _core)
 ├── styles/ templates/ vendor/  이 스킬 전용 자산
-├── prompts/                    원본 프롬프트 스냅샷 (번역 금지 · zip 에는 안 실린다)
-└── LICENSE.txt
+└── prompts/                    원본 프롬프트 스냅샷 (번역 금지 · zip 에는 안 실린다)
+                                 total-report 는 형제 것을 참조한다 · 복제하지 않는다
 
 dist/lm-<스킬명>.zip              빌드 산출 · 스킬당 하나 (국가 코드 없음)
 ```

@@ -53,6 +53,7 @@ import components_path as cp       # path-specific builders (flow tree, path/hub
 import components_cluster as cc    # cluster-specific hub table + flow builders  # noqa: E402
 import components_total as ct      # NEW: umbrella shell (4-tab nav, total cover, hub cross-view)  # noqa: E402
 from inline_styles import inline_styles  # noqa: E402
+from style_order import SKILL_STYLES  # noqa: E402
 # NOTE: components_query (legacy chart view) is vendored for provenance but NOT
 # imported — the query card path emits no Chart.js and does not need it.
 
@@ -268,7 +269,7 @@ def _read_json(path) -> dict:
 def _common_blocks(skill: str, lang: str, category: str, labels: dict, *, title_key: str, dash_tab_key: str) -> dict:
     """`lang` = report language. Font, <html lang> and toolbar follow the text
     on screen, not the market being analysed."""
-    inlined_css = inline_styles(STYLES_DIR, skill)
+    inlined_css = inline_styles(STYLES_DIR, skill, SKILL_STYLES)
     if LOCALE_FONT_OVERRIDE.get(lang):
         inlined_css += "\n\n/* === locale font override === */\n" + LOCALE_FONT_OVERRIDE[lang]
     return {

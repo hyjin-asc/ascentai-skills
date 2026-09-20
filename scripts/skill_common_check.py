@@ -162,11 +162,11 @@ def check_skill(skill_dir: Path, res: Result) -> None:
                 f"예: {tags[0]!r}",
             )
 
-    # 4) LICENSE.txt — 경고. 현재 9개 중 8개가 미보유 상태라 실패로 걸면 커밋이 전부 막힌다.
-    #    별건으로 채운 뒤 fail 로 승격할 것.
+    # 4) LICENSE.txt — 네 스킬이 같은 내용을 쓰므로 _core 에 한 벌만 둔다.
+    #    빌드가 여기서 복사해 zip 마다 넣는다 (scripts/build.sh).
     res.tick()
-    if not (license_dir / "LICENSE.txt").exists():
-        res.warn(name, "LICENSE.txt 부재 (AGENTS.md 최소 구조 규약)")
+    if not (ROOT / "_core" / "LICENSE.txt").exists():
+        res.fail(name, "_core/LICENSE.txt 부재 — 빌드가 zip 에 넣을 라이선스가 없다")
 
     # 5) 참조 깊이 1단계
     #    SKILL.md 가 가리키는 md 가 또 다른 md 를 가리키면, Claude 가 부분 읽기(head -100)로

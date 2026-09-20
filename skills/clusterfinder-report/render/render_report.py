@@ -33,6 +33,7 @@ sys.path.insert(0, str(HERE))
 import components as ca            # customer-analysis card builders (t(), persona_card_html, ...)  # noqa: E402
 import components_cluster as cc    # cluster-specific hub table + flow builders  # noqa: E402
 from inline_styles import inline_styles  # noqa: E402
+from style_order import SKILL_STYLES  # noqa: E402
 
 
 PKG_ROOT = HERE.parent.parent
@@ -146,7 +147,7 @@ def _load_labels(skill: str, lang: str) -> dict:
 def _common_blocks(skill: str, lang: str, category: str, labels: dict, *, title_key: str, dash_tab_key: str) -> dict:
     """`lang` = report language. Font, <html lang> and toolbar follow the text
     on screen, not the market being analysed."""
-    inlined_css = inline_styles(STYLES_DIR, skill)
+    inlined_css = inline_styles(STYLES_DIR, skill, SKILL_STYLES)
     if LOCALE_FONT_OVERRIDE.get(lang):
         inlined_css += "\n\n/* === locale font override === */\n" + LOCALE_FONT_OVERRIDE[lang]
     return {

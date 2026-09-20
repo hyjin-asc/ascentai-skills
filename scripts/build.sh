@@ -61,7 +61,7 @@ build_one() {
   for bname in $borrows; do
     [[ -d "$SRC/$bname" ]] || { echo "  ✗ $name · borrows 대상 없음: $bname" >&2; rm -rf "$stage"; return 1; }
     find "$SRC/$bname/render" -name '*.py' \
-         ! -name render_report.py ! -name inline_styles.py \
+         ! -name render_report.py ! -name style_order.py \
          -exec cp {} "$d/_shared/render/" \;
     cp "$SRC/$bname"/templates/*        "$d/_shared/templates/"
     cp "$SRC/$bname"/styles/*.css       "$d/_shared/styles/" 2>/dev/null || true
@@ -76,7 +76,7 @@ build_one() {
   [[ "$vendor" == "true" ]] && { mkdir -p "$d/_shared/vendor"; cp "$sdir"/vendor/* "$d/_shared/vendor/"; }
   # prompts/ 는 zip 에 넣지 않는다 — DaaS 운영 프롬프트를 무수정으로 뜬 사본이라
   # 실행에 쓰이지 않고, 대조는 저장소를 보는 유지보수자만 한다 (고객 배포물 제외).
-  cp "$sdir/LICENSE.txt"               "$d/LICENSE.txt"
+  cp "$CORE/LICENSE.txt"               "$d/LICENSE.txt"
 
   # ── 문서 · 라벨 ──
   cp "$sdir/SKILL.md"                  "$d/SKILL.md"

@@ -11,7 +11,10 @@ prompt (agent_query v0.4.7): it groups related queries by **search purpose** and
 <!-- NOTE: the snapshot below lives in the source repository only — it is not
      shipped inside this skill. It is diff material for maintainers, not runtime input.
      Snapshot: skills/queryfinder-report/prompts/agent_query.1958.kr.md (v0.4.7, 2026-07-01)
-     + agent_system_prompt.1758.kr.md — exported from the gpt_prompt DB (intent-finder-dev) on 2026-07-20.
+     + agent_system_prompt.1758.kr.md (the agent's system prompt)
+     + agent_default_template.1726.kr.md (the wrapper that assembles context_csv +
+       previous turn + the question around it)
+     — all exported from the gpt_prompt DB (intent-finder-dev) on 2026-07-20.
      The Step 3 prompt is a JSON-output adaptation of that original's analysis frame (target/intent
      keyword decomposition · intent types · Top5 search purposes · Top5 brand/non-brand · volume_avg
      only · top 1,000 cap); diff against this snapshot when you need to verify that.
