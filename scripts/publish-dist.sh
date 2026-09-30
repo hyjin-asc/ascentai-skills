@@ -91,7 +91,13 @@ if git diff --quiet && git diff --cached --quiet && [[ -z "$(git status --porcel
   echo "▶ 변경 없음 · 푸시 생략"; exit 0
 fi
 git add -A
-SUMMARY=$(printf '%s\n' "${ENTRIES[@]}" | sed 's/\t/ v/' | paste -sd' · ' -)
+# paste -d 는 구분자를 "바이트 단위로 순환" 시킨다. ' · ' 는 UTF-8 4바이트라
+# (공백·0xC2·0xB7·공백) 이 번갈아 끼면서 메시지가 깨진다 — 직접 이어 붙인다.
+SUMMARY=""
+for e in "${ENTRIES[@]}"; do
+  [[ -n "$SUMMARY" ]] && SUMMARY+=" · "
+  SUMMARY+="${e%%$'\t'*} v${e##*$'\t'}"
+done
 git commit -q -m "[dist] $SUMMARY"
 git push -q origin HEAD
 echo "▶ 배포 완료 · $SUMMARY"
